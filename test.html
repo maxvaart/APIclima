@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba con Fetch</title>
+    <link href="estilo.css" rel="stylesheet"> <!-- Pequeña hoja de estilos para dar formato-->
+    <script>
+        const url="http://api.openweathermap.org/data/2.5/weather?q=Montevideo,uy&APPID=42bf22a7866b28d31df8228cd0bd0ed3"; 
+        //dirección de la API. Puede ser la ruta a un archivo json. CREA LA TUYA.
+
+        fetch(url) //Realizamos el fetch que devolverá una promesa
+            .then( respuesta=>respuesta.json()) //Obtenemos una promesa que trataremos como json
+            .then(datos=> { //obtenemos una nueva promesa, pero los datos ya están como json.
+                document.getElementById('ciudad').innerHTML= datos.name + "," + datos.sys.country; //escribo los datos del país
+                document.getElementById('temp').innerHTML=(datos.main.temp -273.15).toFixed(1) + "º";//escribo la temperatura. la convierto de kelvin a celsius
+                document.getElementById('imagen').src="http://openweathermap.org/img/wn/"+ datos.weather[0].icon +".png" //imagen
+                document.getElementById('st').innerHTML="<EM>SENSACION TERMICA: <BR></EM> " + ( datos.main.feels_like -273.15).toFixed(1) + "º";//sensacion termica
+                document.getElementById('hm').innerHTML="<EM>HUMEDAD:</EM><BR> %" + ( datos.main.humidity);//Humedad
+            })
+            .catch( error => alert("Hubo un error: " + error));
+    </script>
+</head>
+<body>
+    <h1>LA PAGINA DEL CLIMA</h1>
+    <div id="cosas">
+        <span id="ciudad"></span><br>
+        <span id="temp"> </span>
+        <img id="imagen" src=""><br>
+        <span id="st"></span><br>
+        <span id="hm"></span>
+        
+    </div>
+    <p> Montevideo es la capital y ciudad más poblada de la República Oriental del Uruguay. 
+        Asimismo, es sede del Mercosur y de la ALADI. El censo de 2011 registró 1 319 108 habitantes en el departamento y 1 947 604 en el área metropolitana.5​ Se ubica en la zona meridional del país6​ y es la capital más austral de América. Limita al oeste con el departamento de San José, y al norte y este con el de Canelones. Al sur tiene costas sobre el Río de la Plata, donde se ubican la bahía de Montevideo y el principal puerto de la región. 
+        Está dividida en 8 municipios.</p>
+    
+</body>
+</html>
