@@ -6,7 +6,7 @@
     <title>Prueba con Fetch</title>
     <link href="estilo.css" rel="stylesheet"> <!-- Pequeña hoja de estilos para dar formato-->
     <script>
-        const url="http://api.openweathermap.org/data/2.5/weather?q=Montevideo,uy&APPID=42bf22a7866b28d31df8228cd0bd0ed3"; 
+        const url="https://api.openweathermap.org/data/2.5/weather?q=Montevideo,uy&APPID=42bf22a7866b28d31df8228cd0bd0ed3"; 
         //dirección de la API. Puede ser la ruta a un archivo json. CREA LA TUYA.
 
         fetch(url) //Realizamos el fetch que devolverá una promesa
@@ -14,7 +14,7 @@
             .then(datos=> { //obtenemos una nueva promesa, pero los datos ya están como json.
                 document.getElementById('ciudad').innerHTML= datos.name + "," + datos.sys.country; //escribo los datos del país
                 document.getElementById('temp').innerHTML=(datos.main.temp -273.15).toFixed(1) + "º";//escribo la temperatura. la convierto de kelvin a celsius
-                document.getElementById('imagen').src="http://openweathermap.org/img/wn/"+ datos.weather[0].icon +".png" //imagen
+                document.getElementById('imagen').src="https://openweathermap.org/img/wn/"+ datos.weather[0].icon +".png" //imagen
                 document.getElementById('st').innerHTML="<EM>SENSACION TERMICA: <BR></EM> " + ( datos.main.feels_like -273.15).toFixed(1) + "º";//sensacion termica
                 document.getElementById('hm').innerHTML="<EM>HUMEDAD:</EM><BR> %" + ( datos.main.humidity);//Humedad
             })
